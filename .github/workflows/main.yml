@@ -24,4 +24,4 @@ jobs:
       uses: Jerome1337/golint-action@v1.0.2
       with:
     # Path used by golint command
-       golint-path: $GITHUB_WORKSPACE/go/src/
+       golint-path: ./go/src/
