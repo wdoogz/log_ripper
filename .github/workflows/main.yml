@@ -20,6 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: test
+      uses: Jerome1337/golint-action@v1.0.2
       with: pwd
     # Runs a set of commands using the runners shell
     - name: Go-linter
