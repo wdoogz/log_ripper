@@ -7,5 +7,5 @@ import (
 
 func main() {
 	fmt.Println("Init")
-	parser.Parser("/Users/wdugan/Documents/PersonalGit/log_ripper/test.txt")
+	parser.ParseLogDir("/Users/wdugan/Documents/PersonalGit/log_ripper/log_files_test")
 }
