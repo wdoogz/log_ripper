@@ -35,5 +35,6 @@ func ParseLogDir(dirName string) int {
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	return totalErrors
 }

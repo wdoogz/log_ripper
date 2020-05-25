@@ -3,22 +3,24 @@ package poster
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
 
 //Poster posts
-func Poster(url string, databaseName string, databaseUser string, databasePass string) {
+func Poster(host string, databaseName string, databaseUser string, databasePass string, errorCount int) []byte {
 	var client = &http.Client{}
 	var currentTime = strconv.FormatInt(time.Now().Unix(), 10)
-	var data = strings.NewReader(`cpu_load_short,host=server01,region=us-west value=0.64` + currentTime + `000000000`)
+	var hostname, _ = os.Hostname()
+	var postURL string = "http://" + host + "/write?db=" + databaseName
+	var newErrorCount string = strconv.Itoa(errorCount)
+	var data = strings.NewReader(`log_errors,host=` + hostname + ` value=` + newErrorCount + ` ` + currentTime + `000000000`)
 
-	r, err := http.NewRequest("POST", url+"/write?db="+databaseName, data)
+	r, err := http.NewRequest("POST", postURL, data)
 	r.Header.Set("Authorization", "Token "+databaseUser+":"+databasePass)
-
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -30,7 +32,7 @@ func Poster(url string, databaseName string, databaseUser string, databasePass s
 
 	bodyText, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
-	fmt.Printf("%s\n", bodyText)
+	return bodyText
 }
