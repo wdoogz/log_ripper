@@ -13,7 +13,7 @@ func ParseLogFile(fileName string) {
 		fmt.Println("Error!!... ->", err)
 	}
 
-	r, _ := regexp.Compile("error")
+	r, _ := regexp.Compile("[errorERROR]?[failFAIL]?")
 	results := r.FindAllString(string(logFile), -1)
 	fmt.Println(len(results))
 
@@ -23,8 +23,12 @@ func ParseLogFile(fileName string) {
 func ParseLogDir(dirName string) {
 	logDir, err := ioutil.ReadDir(dirName)
 	for _, dirLogFile := range logDir {
-		logFileName, err := ioutil.ReadFile(dirName + "/" + dirLogFile.Name())
-		fmt.Println(string(logFileName))
+		logFileName, _ := ioutil.ReadFile(dirName + "/" + dirLogFile.Name())
+
+		fmt.Println(dirLogFile.Name())
+		r, _ := regexp.Compile("[errorERROR]?[failFAIL]?")
+		results := r.FindAllString(string(logFileName), -1)
+		fmt.Println(len(results))
 
 		if err != nil {
 			fmt.Println(err)
