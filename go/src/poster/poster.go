@@ -22,6 +22,7 @@ func Poster(url string, databaseName string, databaseUser string, databasePass s
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	resp, err := client.Do(r)
 	if err != nil {
 		fmt.Println(err)
