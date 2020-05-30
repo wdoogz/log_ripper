@@ -17,7 +17,7 @@ func Poster(host string, databaseName string, databaseUser string, databasePass 
 	var hostname, _ = os.Hostname()
 	var postURL string = "http://" + host + "/write?db=" + databaseName
 	var newErrorCount string = strconv.Itoa(errorCount)
-	var data = strings.NewReader(`log_errors,host=` + hostname + ` value=` + newErrorCount + ` ` + currentTime + `000000000`)
+	var data = strings.NewReader(`log_errors,host=` + hostname + ` errors=` + newErrorCount + ` ` + currentTime + `000000000`)
 
 	r, err := http.NewRequest("POST", postURL, data)
 	r.Header.Set("Authorization", "Token "+databaseUser+":"+databasePass)
