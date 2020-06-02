@@ -3,14 +3,15 @@ package main
 import (
 	"fmt"
 	"os"
-	"parser"
-	"poster"
+
+	"github.com/wdoogz/log_ripper/parser"
+	"github.com/wdoogz/log_ripper/poster"
 )
 
 func main() {
 	var numberOfErrors int
 	if len(os.Args) != 6 {
-		fmt.Println("\n\nUsage: \n>> log_ripper <path to logs> <hostname/url and port> <database name> <database username> <database password>\n\n")
+		fmt.Println("\n\nUsage: \n>> log_ripper <path to logs> <hostname/url and port> <database name> <database username> <database password>")
 		fmt.Println("\nExample: \n>> log_ripper /var/log/messages 192.168.1.10:8086 mydb myuser mypass")
 	}
 
